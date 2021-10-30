@@ -1,0 +1,6 @@
+Nimble Chat
+
+Features
+1. Will able to create or join chat room
+2. Only people can chat in a chat room
+3. 

@@ -1,7 +1,17 @@
+import { Switch, Route } from 'react-router'
 import styled from 'styled-components'
+import ChatPage from './pages/Chat'
+import HomePage from './pages/Home'
 
 function App() {
-	return <Container>Nimble</Container>
+	return (
+		<Container>
+			<Switch>
+				<Route exact path='/' component={HomePage} />
+				<Route exact path='/r/:id' component={ChatPage} />
+			</Switch>
+		</Container>
+	)
 }
 
 export default App
