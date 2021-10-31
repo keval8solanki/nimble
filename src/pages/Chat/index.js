@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { v4 } from 'uuid'
+
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { MessageBubble } from './chat.styled'
 
