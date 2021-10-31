@@ -31,7 +31,8 @@ export default function ChatPage({ match }) {
 
 	socket.on(SOCKET_EVENTS.ROOM_FULL, (data) => {
 		if (chatRef.current) {
-			chatRef.current.innerText = 'ROOM FULL'
+			chatRef.current.innerText =
+				'This Room is full to create new rooms visit: https://nimble-chat.vercel.app'
 		}
 	})
 
@@ -61,35 +62,41 @@ export default function ChatPage({ match }) {
 	})
 
 	return (
-		<ChatContainer ref={chatRef}>
-			<TitleContainer>
-				<Title style={{ margin: '0' }}>
-					n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
-				</Title>
-				<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
-					Leave
-				</LeaveButton>
-			</TitleContainer>
+		<>
+			<ChatContainer ref={chatRef}>
+				<TitleContainer>
+					<Title style={{ margin: '0' }}>
+						n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
+					</Title>
+					<LeaveButton
+						onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+						Leave
+					</LeaveButton>
+				</TitleContainer>
 
-			<MessageBubble
-				onlineStatus={onlineStatus}
-				ref={messageRef}></MessageBubble>
-			<InputContainter>
-				<textarea
-					rows='3'
-					ref={textareaRef}
-					onChange={(e) => emit(e.target.value)}></textarea>
-				<button
-					onClick={() => {
-						textareaRef.current.value = ''
-						textareaRef.current.focus()
-						emit('')
-					}}>
-					Clear
-				</button>
-			</InputContainter>
+				<MessageBubble
+					onlineStatus={onlineStatus}
+					ref={messageRef}></MessageBubble>
+				<InputContainter>
+					<textarea
+						rows='3'
+						ref={textareaRef}
+						onChange={(e) => emit(e.target.value)}></textarea>
+					<button
+						onClick={() => {
+							textareaRef.current.value = ''
+							textareaRef.current.focus()
+							emit('')
+						}}>
+						Clear
+					</button>
+				</InputContainter>
 
-			{isLeft && <Redirect to='/' />}
-		</ChatContainer>
+				{isLeft && <Redirect to='/' />}
+			</ChatContainer>
+			<div style={{ display: 'none' }}>
+				<h1>This Room is full Create new here</h1>
+			</div>
+		</>
 	)
 }
