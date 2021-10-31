@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
-import { Highlight, Title } from '../Home/homepage.styled'
+import { GREEN, RED } from '../../styles/colors'
+import { Title } from '../Home/homepage.styled'
 import {
 	MessageBubble,
 	InputContainter,
@@ -14,6 +15,8 @@ import {
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
 	const [user, setUser] = useState()
+	const [onlineStatus, setOnlineStatus] = useState(false)
+
 	const messageRef = useRef()
 	const chatRef = useRef()
 	const [isLeft, setIsLeft] = useState(false)
@@ -50,18 +53,27 @@ export default function ChatPage({ match }) {
 		}
 	})
 
+	socket.on(`${SOCKET_EVENTS.ONLINE}/${user}`, (data) => {
+		setOnlineStatus(true)
+	})
+	socket.on(`${SOCKET_EVENTS.OFFLINE}/${user}`, (data) => {
+		setOnlineStatus(false)
+	})
+
 	return (
 		<ChatContainer ref={chatRef}>
 			<TitleContainer>
 				<Title style={{ margin: '0' }}>
-					n<Highlight>i</Highlight>mble
+					n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
 				</Title>
 				<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
 					Leave
 				</LeaveButton>
 			</TitleContainer>
 
-			<MessageBubble ref={messageRef}></MessageBubble>
+			<MessageBubble
+				onlineStatus={onlineStatus}
+				ref={messageRef}></MessageBubble>
 			<InputContainter>
 				<textarea
 					rows='3'

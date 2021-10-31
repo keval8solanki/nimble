@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CHARCOAL, RED } from '../../styles/colors'
+import { CHARCOAL, GREEN, RED } from '../../styles/colors'
 import { Button } from '../../styles/common.style'
 
 export const TitleContainer = styled.div`
@@ -26,6 +26,9 @@ export const MessageBubble = styled.p`
 	overflow-wrap: break-word;
 	min-height: 100px;
 
+	border: ${(props) =>
+		props && props.onlineStatus ? '1px solid #2a9d8f' : 'none'};
+
 	margin-top: 20px;
 	@keyframes cursor-blink {
 		0% {
@@ -38,7 +41,7 @@ export const MessageBubble = styled.p`
 		width: 5px;
 		height: 15px;
 		margin-left: 2px;
-		background: ${RED};
+		background: ${(props) => props && (props.onlineStatus ? GREEN : RED)};
 		display: inline-block;
 		animation: cursor-blink 0.7s steps(2) infinite;
 	}
