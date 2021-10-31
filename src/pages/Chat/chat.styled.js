@@ -24,6 +24,7 @@ export const MessageBubble = styled.p`
 	font-weight: bold;
 	text-align: left;
 	overflow-wrap: break-word;
+	min-height: 100px;
 
 	margin-top: 20px;
 	@keyframes cursor-blink {
