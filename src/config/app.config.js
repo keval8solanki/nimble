@@ -3,7 +3,7 @@ const MODE = {
 	PRODUCTION: 'production',
 }
 
-const CURRENT_MODE = MODE.DEVELOPMENT
+const CURRENT_MODE = MODE.PRODUCTION
 
 const BASE_URLS = {
 	development: {
