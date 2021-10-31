@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Redirect } from 'react-router'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { MessageBubble } from './chat.styled'
@@ -8,6 +9,7 @@ export default function ChatPage({ match }) {
 	const [user, setUser] = useState()
 	const messageRef = useRef()
 	const chatRef = useRef()
+	const [isLeft, setIsLeft] = useState(false)
 
 	useEffect(() => {
 		socket.emit(SOCKET_EVENTS.JOIN_ROOM, id)
@@ -30,6 +32,10 @@ export default function ChatPage({ match }) {
 		setUser(data.user)
 	})
 
+	socket.on(SOCKET_EVENTS.LEFT_ROOM, (data) => {
+		setIsLeft(true)
+	})
+
 	socket.on(`${SOCKET_EVENTS.RECEIVE_MESSAGE}/${user}`, (data) => {
 		if (messageRef.current) {
 			messageRef.current.innerText = data?.data
@@ -43,6 +49,7 @@ export default function ChatPage({ match }) {
 			</button>
 			<MessageBubble ref={messageRef}></MessageBubble>
 			<input onChange={(e) => emit(e.target.value)} />
+			{isLeft && <Redirect to='/' />}
 		</div>
 	)
 }

@@ -12,21 +12,28 @@ import { v4 } from 'uuid'
 
 export default function HomePage() {
 	const [newRoom, setNewRoom] = useState(false)
+	const [roomname, setRoomname] = useState(() => v4())
 
 	return (
 		<Container>
 			<h1>Nimble</h1>
 			<OptionContainer>
-				<CreateChatRoomButton onClick={() => setNewRoom(true)}>
-					Create Chat Room
-				</CreateChatRoomButton>
-				<p>OR</p>
-				<EnterRoomForm onSubmit={(e) => e.preventDefault()}>
-					<EnterRoomInput type='text' placeholder='Enter room name' />
+				<EnterRoomForm
+					onSubmit={(e) => {
+						e.preventDefault()
+						setNewRoom(true)
+					}}>
+					<EnterRoomInput
+						autoFocus
+						value={roomname}
+						onChange={(e) => setRoomname(e.target.value)}
+						type='text'
+						placeholder='Enter room name'
+					/>
 					<EnterRoomButton type='submit'>Join</EnterRoomButton>
 				</EnterRoomForm>
 			</OptionContainer>
-			{newRoom && <Redirect to={`/r/${v4()}`} />}
+			{newRoom && <Redirect to={`/r/${roomname}`} />}
 		</Container>
 	)
 }
