@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
+import { Highlight, Title } from '../Home/homepage.styled'
 import {
 	MessageBubble,
 	InputContainter,
 	LeaveButton,
 	ChatContainer,
+	TitleContainer,
 } from './chat.styled'
 
 export default function ChatPage({ match }) {
@@ -50,13 +52,19 @@ export default function ChatPage({ match }) {
 
 	return (
 		<ChatContainer ref={chatRef}>
-			<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
-				Leave
-			</LeaveButton>
+			<TitleContainer>
+				<Title style={{ margin: '0' }}>
+					n<Highlight>i</Highlight>mble
+				</Title>
+				<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+					Leave
+				</LeaveButton>
+			</TitleContainer>
+
 			<MessageBubble ref={messageRef}></MessageBubble>
 			<InputContainter>
 				<textarea
-					rows='4'
+					rows='3'
 					ref={textareaRef}
 					onChange={(e) => emit(e.target.value)}></textarea>
 				<button
@@ -68,6 +76,7 @@ export default function ChatPage({ match }) {
 					Clear
 				</button>
 			</InputContainter>
+
 			{isLeft && <Redirect to='/' />}
 		</ChatContainer>
 	)

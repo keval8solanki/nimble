@@ -5,7 +5,9 @@ import {
 	EnterRoomButton,
 	EnterRoomForm,
 	EnterRoomInput,
+	Highlight,
 	OptionContainer,
+	Title,
 } from './homepage.styled'
 import { v4 } from 'uuid'
 
@@ -15,7 +17,9 @@ export default function HomePage() {
 
 	return (
 		<Container>
-			<h1>Nimble</h1>
+			<Title>
+				n<Highlight>i</Highlight>mble
+			</Title>
 			<OptionContainer>
 				<EnterRoomForm
 					onSubmit={(e) => {

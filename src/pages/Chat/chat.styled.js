@@ -1,13 +1,29 @@
 import styled from 'styled-components'
-import { CHARCOAL, GREEN, RED } from '../../styles/colors'
+import { CHARCOAL, RED } from '../../styles/colors'
+import { Button } from '../../styles/common.style'
+
+export const TitleContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: sticky;
+	top: 0;
+	background-color: white;
+`
 
 export const MessageBubble = styled.p`
 	padding: 20px;
 
-	background-color: ${GREEN};
-	border-radius: 16px;
+	background-color: #c8d5db;
+	border-radius: 8px;
 	margin: 0 auto;
-	color: white;
+	color: ${CHARCOAL};
+
+	margin-bottom: 125px;
+
+	font-weight: bold;
+	text-align: left;
+	overflow-wrap: break-word;
 
 	margin-top: 20px;
 	@keyframes cursor-blink {
@@ -18,12 +34,12 @@ export const MessageBubble = styled.p`
 
 	&::after {
 		content: '';
-		width: 3px;
+		width: 5px;
 		height: 15px;
 		margin-left: 2px;
-		background: white;
+		background: ${RED};
 		display: inline-block;
-		animation: cursor-blink 1s steps(2) infinite;
+		animation: cursor-blink 0.7s steps(2) infinite;
 	}
 `
 
@@ -31,14 +47,20 @@ export const InputContainter = styled.div`
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
-	margin-top: 40px;
+
+	background-color: white;
+	position: fixed;
+	bottom: 20px;
+	width: calc(100% - 40px);
+
 	flex-direction: column;
+	margin-top: 10px;
 
 	textarea {
-		width: 87%;
+		width: calc(100% - 23px);
 		margin: 0;
-		padding: 20px;
-		border-radius: 16px;
+		padding: 10px;
+		border-radius: 8px;
 		margin-bottom: 10px;
 		color: ${CHARCOAL};
 		font-weight: bold;
@@ -48,26 +70,20 @@ export const InputContainter = styled.div`
 		}
 	}
 	button {
-		width: 100%;
 		background-color: ${RED};
 		color: white;
-		border-radius: 16px;
+		border-radius: 8px;
+		border: 1px solid #1a4e1a63;
+		width: 100%;
 		padding: 5px;
-		border: none;
 	}
 `
 
-export const Button = styled.button`
-	width: 100%;
-	color: white;
-`
-
-export const LeaveButton = styled.button`
+export const LeaveButton = styled(Button)`
 	background-color: ${RED};
 	color: white;
-	border-radius: 16px;
-	padding: 5px 10px;
-	border: none;
+	border-radius: 8px;
+	border: 1px solid #1a4e1a63;
 `
 
 export const ChatContainer = styled.div`
