@@ -29,7 +29,10 @@ export default function HomePage() {
 					<EnterRoomInput
 						autoFocus
 						value={roomname}
-						onChange={(e) => setRoomname(e.target.value)}
+						onChange={(e) => {
+							const val = e.target.value.toLowerCase().split(' ').join('-')
+							setRoomname(val)
+						}}
 						type='text'
 						placeholder='Enter room name'
 					/>
