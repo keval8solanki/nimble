@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
-import { MessageBubble } from './chat.styled'
+import {
+	MessageBubble,
+	InputContainter,
+	LeaveButton,
+	ChatContainer,
+} from './chat.styled'
 
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
@@ -10,6 +15,7 @@ export default function ChatPage({ match }) {
 	const messageRef = useRef()
 	const chatRef = useRef()
 	const [isLeft, setIsLeft] = useState(false)
+	const textareaRef = useRef()
 
 	useEffect(() => {
 		socket.emit(SOCKET_EVENTS.JOIN_ROOM, id)
@@ -43,13 +49,26 @@ export default function ChatPage({ match }) {
 	})
 
 	return (
-		<div ref={chatRef}>
-			<button onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+		<ChatContainer ref={chatRef}>
+			<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
 				Leave
-			</button>
+			</LeaveButton>
 			<MessageBubble ref={messageRef}></MessageBubble>
-			<input onChange={(e) => emit(e.target.value)} />
+			<InputContainter>
+				<textarea
+					rows='4'
+					ref={textareaRef}
+					onChange={(e) => emit(e.target.value)}></textarea>
+				<button
+					onClick={() => {
+						textareaRef.current.value = ''
+						textareaRef.current.focus()
+						emit('')
+					}}>
+					Clear
+				</button>
+			</InputContainter>
 			{isLeft && <Redirect to='/' />}
-		</div>
+		</ChatContainer>
 	)
 }
