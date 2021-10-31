@@ -24,10 +24,13 @@ export default function HomePage() {
 				<EnterRoomForm
 					onSubmit={(e) => {
 						e.preventDefault()
-						setNewRoom(true)
+						if (roomname) {
+							setNewRoom(true)
+						}
 					}}>
 					<EnterRoomInput
 						autoFocus
+						required
 						value={roomname}
 						onChange={(e) => {
 							const val = e.target.value.toLowerCase().split(' ').join('-')
