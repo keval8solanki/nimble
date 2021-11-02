@@ -76,9 +76,9 @@ export default function ChatPage({ match }) {
 				</TitleContainer>
 
 				<ChatDisplayContainer>
-					<MessageBubble
-						onlineStatus={onlineStatus}
-						ref={messageRef}></MessageBubble>
+					<MessageBubble onlineStatus={onlineStatus} ref={messageRef}>
+						Your partner's message will appear here!
+					</MessageBubble>
 
 					{/* <MessageBubble
 						contentEditable
@@ -87,7 +87,9 @@ export default function ChatPage({ match }) {
 						<textarea
 							rows='3'
 							ref={textareaRef}
-							onChange={(e) => emit(e.target.value)}></textarea>
+							onChange={(e) => emit(e.target.value)}
+							placeholder='Type your message here...'></textarea>
+
 						<button
 							onClick={() => {
 								textareaRef.current.value = ''

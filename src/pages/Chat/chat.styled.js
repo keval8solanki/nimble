@@ -65,7 +65,7 @@ export const InputContainter = styled.div`
 	flex-direction: column;
 
 	textarea {
-		width: calc(100% - 41px);
+		width: calc(100% - 43px);
 		margin: 0;
 		padding: 20px;
 		border-radius: 8px;
