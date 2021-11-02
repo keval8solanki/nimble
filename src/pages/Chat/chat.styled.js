@@ -9,27 +9,26 @@ export const TitleContainer = styled.div`
 	position: sticky;
 	top: 0;
 	background-color: white;
+	padding: 10px 20px;
 `
 
 export const MessageBubble = styled.p`
 	padding: 20px;
-
+	flex: 2;
 	background-color: #c8d5db;
 	border-radius: 8px;
 	margin: 0 auto;
 	color: ${CHARCOAL};
-
-	margin-bottom: 125px;
-
+	font-size: 1.3em;
+	margin: 20px 20px 0 20px;
 	font-weight: bold;
 	text-align: left;
 	overflow-wrap: break-word;
-	min-height: 100px;
-
+	/* min-height: 150px; */
+	outline: none;
 	border: ${(props) =>
 		props && props.onlineStatus ? '1px solid #2a9d8f' : 'none'};
 
-	margin-top: 20px;
 	@keyframes cursor-blink {
 		0% {
 			opacity: 0;
@@ -47,30 +46,39 @@ export const MessageBubble = styled.p`
 	}
 `
 
+export const ChatDisplayContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - 63px);
+`
+
 export const InputContainter = styled.div`
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
-
+	padding: 20px;
 	background-color: white;
-	position: fixed;
-	bottom: 20px;
+	/* position: fixed;
+	bottom: 0; */
 	width: calc(100% - 40px);
-
+	flex: 1;
 	flex-direction: column;
-	margin-top: 10px;
 
 	textarea {
-		width: calc(100% - 23px);
+		width: calc(100% - 41px);
 		margin: 0;
-		padding: 10px;
+		padding: 20px;
 		border-radius: 8px;
+		border: none;
+		background-color: #e76f5136;
 		margin-bottom: 10px;
 		color: ${CHARCOAL};
 		font-weight: bold;
-
+		flex: 1;
+		font-size: 1.5em;
 		&:focus {
 			outline: ${CHARCOAL};
+			border: 1px solid ${RED};
 		}
 	}
 	button {
@@ -91,5 +99,5 @@ export const LeaveButton = styled(Button)`
 `
 
 export const ChatContainer = styled.div`
-	padding: 20px;
+	/* padding: 20px; */
 `

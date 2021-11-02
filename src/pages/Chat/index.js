@@ -10,6 +10,7 @@ import {
 	LeaveButton,
 	ChatContainer,
 	TitleContainer,
+	ChatDisplayContainer,
 } from './chat.styled'
 
 export default function ChatPage({ match }) {
@@ -74,23 +75,29 @@ export default function ChatPage({ match }) {
 					</LeaveButton>
 				</TitleContainer>
 
-				<MessageBubble
-					onlineStatus={onlineStatus}
-					ref={messageRef}></MessageBubble>
-				<InputContainter>
-					<textarea
-						rows='3'
-						ref={textareaRef}
-						onChange={(e) => emit(e.target.value)}></textarea>
-					<button
-						onClick={() => {
-							textareaRef.current.value = ''
-							textareaRef.current.focus()
-							emit('')
-						}}>
-						Clear
-					</button>
-				</InputContainter>
+				<ChatDisplayContainer>
+					<MessageBubble
+						onlineStatus={onlineStatus}
+						ref={messageRef}></MessageBubble>
+
+					{/* <MessageBubble
+						contentEditable
+						onInput={(e) => emit(e.currentTarget.textContent)}></MessageBubble> */}
+					<InputContainter>
+						<textarea
+							rows='3'
+							ref={textareaRef}
+							onChange={(e) => emit(e.target.value)}></textarea>
+						<button
+							onClick={() => {
+								textareaRef.current.value = ''
+								textareaRef.current.focus()
+								emit('')
+							}}>
+							Clear
+						</button>
+					</InputContainter>
+				</ChatDisplayContainer>
 
 				{isLeft && <Redirect to='/' />}
 			</ChatContainer>
