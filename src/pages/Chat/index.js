@@ -15,7 +15,7 @@ import {
 
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
-	const [user, setUser] = useState()
+
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
 	const messageRef = useRef()
@@ -33,7 +33,7 @@ export default function ChatPage({ match }) {
 	socket.on(SOCKET_EVENTS.ROOM_FULL, (data) => {
 		if (chatRef.current) {
 			chatRef.current.innerText =
-				'This Room is full to create new rooms visit: https://nimble-chat.vercel.app'
+				'This Room is expired please create new one: https://nimble-chat.vercel.app'
 		}
 	})
 
@@ -41,71 +41,58 @@ export default function ChatPage({ match }) {
 		socket.emit(SOCKET_EVENTS.NEW_MESSAGE, { room: id, data })
 	}
 
-	socket.on(SOCKET_EVENTS.JOINED_ROOM, (data) => {
-		setUser(data.user)
-	})
-
 	socket.on(SOCKET_EVENTS.LEFT_ROOM, (data) => {
 		setIsLeft(true)
 	})
 
-	socket.on(`${SOCKET_EVENTS.RECEIVE_MESSAGE}/${user}`, (data) => {
+	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
 		if (messageRef.current) {
 			messageRef.current.innerText = data?.data
 		}
 	})
 
-	socket.on(`${SOCKET_EVENTS.ONLINE}/${user}`, (data) => {
+	socket.on(SOCKET_EVENTS.ONLINE, (data) => {
 		setOnlineStatus(true)
 	})
-	socket.on(`${SOCKET_EVENTS.OFFLINE}/${user}`, (data) => {
+	socket.on(SOCKET_EVENTS.OFFLINE, (data) => {
 		setOnlineStatus(false)
 	})
 
 	return (
-		<>
-			<ChatContainer ref={chatRef}>
-				<TitleContainer>
-					<Title style={{ margin: '0' }}>
-						n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
-					</Title>
-					<LeaveButton
-						onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
-						Leave
-					</LeaveButton>
-				</TitleContainer>
+		<ChatContainer ref={chatRef}>
+			<TitleContainer>
+				<Title style={{ margin: '0' }}>
+					n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
+				</Title>
+				<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+					Leave
+				</LeaveButton>
+			</TitleContainer>
 
-				<ChatDisplayContainer>
-					<MessageBubble onlineStatus={onlineStatus} ref={messageRef}>
-						Your partner's message will appear here!
-					</MessageBubble>
+			<ChatDisplayContainer>
+				<MessageBubble onlineStatus={onlineStatus} ref={messageRef}>
+					Your partner's message will appear here!
+				</MessageBubble>
 
-					{/* <MessageBubble
-						contentEditable
-						onInput={(e) => emit(e.currentTarget.textContent)}></MessageBubble> */}
-					<InputContainter>
-						<textarea
-							rows='3'
-							ref={textareaRef}
-							onChange={(e) => emit(e.target.value)}
-							placeholder='Type your message here...'></textarea>
+				<InputContainter>
+					<textarea
+						rows='3'
+						ref={textareaRef}
+						onChange={(e) => emit(e.target.value)}
+						placeholder='Type your message here...'></textarea>
 
-						<button
-							onClick={() => {
-								textareaRef.current.value = ''
-								textareaRef.current.focus()
-								emit('')
-							}}>
-							Clear
-						</button>
-					</InputContainter>
-				</ChatDisplayContainer>
+					<button
+						onClick={() => {
+							textareaRef.current.value = ''
+							textareaRef.current.focus()
+							emit('')
+						}}>
+						Clear
+					</button>
+				</InputContainter>
+			</ChatDisplayContainer>
 
-				{isLeft && <Redirect to='/' />}
-			</ChatContainer>
-			<div style={{ display: 'none' }}>
-				<h1>This Room is full Create new here</h1>
-			</div>
-		</>
+			{isLeft && <Redirect to='/' />}
+		</ChatContainer>
 	)
 }
