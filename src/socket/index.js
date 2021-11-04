@@ -16,4 +16,7 @@ export const SOCKET_EVENTS = Object.freeze({
 	RECEIVE_MESSAGE: 'receive_message',
 	ONLINE: 'online',
 	OFFLINE: 'offine',
+
+	FOCUS: 'focus',
+	BLUR: 'blur',
 })

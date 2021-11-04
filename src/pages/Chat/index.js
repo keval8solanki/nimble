@@ -23,6 +23,21 @@ export default function ChatPage({ match }) {
 	const [isLeft, setIsLeft] = useState(false)
 	const textareaRef = useRef()
 
+	function onChange() {
+		if (document.hidden) {
+			socket.emit(SOCKET_EVENTS.BLUR, id)
+		} else {
+			socket.emit(SOCKET_EVENTS.FOCUS, id)
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('visibilitychange', onChange, false)
+		return () => {
+			document.removeEventListener('visibilitychange', onChange)
+		}
+	})
+
 	useEffect(() => {
 		socket.emit(SOCKET_EVENTS.JOIN_ROOM, id)
 		return () => {
