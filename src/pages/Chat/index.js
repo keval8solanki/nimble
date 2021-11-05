@@ -4,7 +4,7 @@ import { useDarkMode } from 'use-hooks'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { GREEN, RED } from '../../styles/colors'
-import { Title } from '../Home/homepage.styled'
+import { DarkModeToggle, Title } from '../Home/homepage.styled'
 import {
 	MessageBubble,
 	InputContainter,
@@ -14,10 +14,13 @@ import {
 	ChatDisplayContainer,
 } from './chat.styled'
 
+import DarkIcon from '../../assets/icons/dark.svg'
+import LightIcon from '../../assets/icons/light.svg'
+
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
 
-	const [darkMode] = useDarkMode()
+	const [darkMode, setDarkMode] = useDarkMode()
 
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
@@ -82,11 +85,24 @@ export default function ChatPage({ match }) {
 				<Title darkMode={darkMode} style={{ margin: '0' }}>
 					n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
 				</Title>
-				<LeaveButton
-					darkMode={darkMode}
-					onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
-					Leave
-				</LeaveButton>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						width: '110px',
+					}}>
+					<DarkModeToggle
+						style={{ position: 'static' }}
+						src={darkMode ? LightIcon : DarkIcon}
+						onClick={() => setDarkMode(!darkMode)}
+					/>
+					<LeaveButton
+						darkMode={darkMode}
+						onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+						Leave
+					</LeaveButton>
+				</div>
 			</TitleContainer>
 
 			<ChatDisplayContainer>
