@@ -65,8 +65,8 @@ export const InputContainter = styled.div`
 	padding: 20px;
 	background: ${(props) => (props && props.darkMode ? '#2a2a2a' : 'white')};
 
-	/* position: fixed;
-	bottom: 0; */
+	position: sticky;
+	bottom: 0;
 	width: calc(100% - 40px);
 	flex: 1;
 	flex-direction: column;
