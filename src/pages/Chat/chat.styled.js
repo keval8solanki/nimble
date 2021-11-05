@@ -30,7 +30,7 @@ export const MessageBubble = styled.p`
 
 	text-align: left;
 	overflow-wrap: break-word;
-	/* min-height: 150px; */
+	min-height: ${window.innerHeight - 292}px;
 	outline: none;
 	border: ${(props) =>
 		props && props.onlineStatus ? '1px solid #2a9d8f' : 'none'};
@@ -53,8 +53,6 @@ export const MessageBubble = styled.p`
 `
 
 export const ChatDisplayContainer = styled.div`
-	display: flex;
-	flex-direction: column;
 	min-height: ${window?.innerHeight - 63}px;
 `
 

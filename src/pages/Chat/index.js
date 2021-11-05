@@ -99,7 +99,7 @@ export default function ChatPage({ match }) {
 
 				<InputContainter darkMode={darkMode}>
 					<textarea
-						rows='3'
+						rows='4'
 						ref={textareaRef}
 						onChange={(e) => emit(e.target.value)}
 						placeholder='Type your message here...'></textarea>
