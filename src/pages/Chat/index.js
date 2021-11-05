@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
+import { useDarkMode } from 'use-hooks'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { GREEN, RED } from '../../styles/colors'
@@ -15,6 +16,8 @@ import {
 
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
+
+	const [darkMode] = useDarkMode()
 
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
@@ -75,21 +78,26 @@ export default function ChatPage({ match }) {
 
 	return (
 		<ChatContainer ref={chatRef}>
-			<TitleContainer>
-				<Title style={{ margin: '0' }}>
+			<TitleContainer darkMode={darkMode}>
+				<Title darkMode={darkMode} style={{ margin: '0' }}>
 					n<span style={{ color: onlineStatus ? GREEN : RED }}>i</span>mble
 				</Title>
-				<LeaveButton onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
+				<LeaveButton
+					darkMode={darkMode}
+					onClick={() => socket.emit(SOCKET_EVENTS.LEAVE_ROOM, id)}>
 					Leave
 				</LeaveButton>
 			</TitleContainer>
 
 			<ChatDisplayContainer>
-				<MessageBubble onlineStatus={onlineStatus} ref={messageRef}>
+				<MessageBubble
+					onlineStatus={onlineStatus}
+					darkMode={darkMode}
+					ref={messageRef}>
 					Your partner's message will appear here!
 				</MessageBubble>
 
-				<InputContainter>
+				<InputContainter darkMode={darkMode}>
 					<textarea
 						rows='3'
 						ref={textareaRef}

@@ -1,6 +1,8 @@
 Nimble Chat
 
 Features
-1. Will able to create or join chat room
-2. Only people can chat in a chat room
-3. 
+1. Will able to create or join chat room (Done)
+2. Only people can chat in a chat room (Done)
+3. Dark mode (Done)
+4. Sound
+5. Animation
