@@ -8,6 +8,7 @@ export const TitleContainer = styled.div`
 	justify-content: space-between;
 	position: sticky;
 	top: 0;
+	z-index: 10;
 	background-color: ${(props) =>
 		props && props.darkMode ? '#1a1a1a' : 'white'};
 	padding: 10px 20px;
@@ -19,7 +20,7 @@ export const MessageBubble = styled.p`
 	background: ${(props) => (props && props.darkMode ? '#c8d5db24' : '#c8d5db')};
 	border-radius: 8px;
 	margin: 0 auto;
-	color: ${(props) => (props && props.darkMode ? '#white' : CHARCOAL)};
+	color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 
 	font-size: 1.2em;
 	margin: 20px 20px 0 20px;
@@ -51,7 +52,7 @@ export const MessageBubble = styled.p`
 export const ChatDisplayContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100vh - 63px);
+	min-height: ${window?.innerHeight - 63}px;
 `
 
 export const InputContainter = styled.div`

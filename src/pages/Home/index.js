@@ -43,7 +43,7 @@ export default function HomePage() {
 				onClick={() => setDarkMode(!darkMode)}
 			/>
 
-			<Title darkMode={darkMode}>
+			<Title style={{ fontSize: '3em' }} darkMode={darkMode}>
 				n<Highlight>i</Highlight>mble
 			</Title>
 			<OptionContainer>
