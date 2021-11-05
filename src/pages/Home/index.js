@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Redirect } from 'react-router'
 import {
 	Container,
+	DarkModeToggle,
 	EnterRoomButton,
 	EnterRoomForm,
 	EnterRoomInput,
@@ -9,6 +10,10 @@ import {
 	OptionContainer,
 	Title,
 } from './homepage.styled'
+
+import { useDarkMode } from 'use-hooks'
+import DarkIcon from '../../assets/icons/dark.svg'
+import LightIcon from '../../assets/icons/light.svg'
 
 import {
 	uniqueNamesGenerator,
@@ -29,9 +34,16 @@ export default function HomePage() {
 		uniqueNamesGenerator(customConfig)
 	)
 
+	const [darkMode, setDarkMode] = useDarkMode()
+
 	return (
 		<Container>
-			<Title>
+			<DarkModeToggle
+				src={darkMode ? LightIcon : DarkIcon}
+				onClick={() => setDarkMode(!darkMode)}
+			/>
+
+			<Title darkMode={darkMode}>
 				n<Highlight>i</Highlight>mble
 			</Title>
 			<OptionContainer>
@@ -45,6 +57,7 @@ export default function HomePage() {
 					<EnterRoomInput
 						autoFocus
 						required
+						darkMode={darkMode}
 						value={roomname}
 						onChange={(e) => {
 							const val = e.target.value.toLowerCase().split(' ').join('-')
@@ -53,7 +66,9 @@ export default function HomePage() {
 						type='text'
 						placeholder='Enter room name'
 					/>
-					<EnterRoomButton type='submit'>Join</EnterRoomButton>
+					<EnterRoomButton darkMode={darkMode} type='submit'>
+						Join
+					</EnterRoomButton>
 				</EnterRoomForm>
 			</OptionContainer>
 			{newRoom && <Redirect to={`/r/${roomname}`} />}

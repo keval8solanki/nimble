@@ -8,20 +8,22 @@ export const TitleContainer = styled.div`
 	justify-content: space-between;
 	position: sticky;
 	top: 0;
-	background-color: white;
+	background-color: ${(props) =>
+		props && props.darkMode ? '#1a1a1a' : 'white'};
 	padding: 10px 20px;
 `
 
 export const MessageBubble = styled.p`
 	padding: 20px;
 	flex: 2;
-	background-color: #c8d5db;
+	background: ${(props) => (props && props.darkMode ? '#c8d5db24' : '#c8d5db')};
 	border-radius: 8px;
 	margin: 0 auto;
-	color: ${CHARCOAL};
-	font-size: 1.3em;
+	color: ${(props) => (props && props.darkMode ? '#white' : CHARCOAL)};
+
+	font-size: 1.2em;
 	margin: 20px 20px 0 20px;
-	font-weight: bold;
+
 	text-align: left;
 	overflow-wrap: break-word;
 	/* min-height: 150px; */
@@ -57,7 +59,8 @@ export const InputContainter = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	padding: 20px;
-	background-color: white;
+	background: ${(props) => (props && props.darkMode ? '#1a1a1a' : 'white')};
+
 	/* position: fixed;
 	bottom: 0; */
 	width: calc(100% - 40px);
@@ -70,34 +73,41 @@ export const InputContainter = styled.div`
 		padding: 20px;
 		border-radius: 8px;
 		border: none;
-		background-color: #e76f5136;
+		background-color: ${(props) =>
+			props && props.darkMode ? ' #e76f5126' : '#e76f5136'};
+
 		margin-bottom: 10px;
-		color: ${CHARCOAL};
-		font-weight: bold;
+		color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
+
 		flex: 1;
-		font-size: 1.5em;
+		font-size: 1.3em;
 		&:focus {
 			outline: ${CHARCOAL};
 			border: 1px solid ${RED};
 		}
 	}
 	button {
-		background-color: ${RED};
-		color: white;
-		border-radius: 8px;
-		border: 1px solid #1a4e1a63;
 		width: 100%;
 		padding: 5px;
+
+		background: ${(props) => (props && props.darkMode ? 'transparent' : RED)};
+		color: ${(props) => (props && props.darkMode ? RED : 'white')};
+		border-radius: 8px;
+		border: 1px solid
+			${(props) => (props && props.darkMode ? RED : '#1a4e1a63')};
+		cursor: pointer;
 	}
 `
 
 export const LeaveButton = styled(Button)`
-	background-color: ${RED};
-	color: white;
+	background: ${(props) => (props && props.darkMode ? 'transparent' : RED)};
+	color: ${(props) => (props && props.darkMode ? RED : 'white')};
 	border-radius: 8px;
-	border: 1px solid #1a4e1a63;
+	border: 1px solid ${(props) => (props && props.darkMode ? RED : '#1a4e1a63')};
+	cursor: pointer;
 `
 
 export const ChatContainer = styled.div`
+	background: transparent;
 	/* padding: 20px; */
 `

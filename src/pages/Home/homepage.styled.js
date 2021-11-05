@@ -8,7 +8,7 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h1`
-	color: ${CHARCOAL};
+	color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 	font-weight: bold;
 	font-size: 2em;
 	text-shadow: 7px 7px 20px #264653ab;
@@ -35,18 +35,25 @@ export const OptionContainer = styled.div``
 export const EnterRoomForm = styled.form``
 
 export const EnterRoomInput = styled.input`
-	border: 1px solid ${CHARCOAL};
+	background: transparent;
+	border: 1px solid ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 	border-radius: 8px;
 	padding: 5px 10px;
 	margin-right: 10px;
-	color: ${CHARCOAL};
+	color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 	outline: none;
 `
 
 export const EnterRoomButton = styled(Button)`
-	background: ${RED};
-	color: white;
+	background: ${(props) => (props && props.darkMode ? 'transparent' : RED)};
+	color: ${(props) => (props && props.darkMode ? RED : 'white')};
 	border-radius: 8px;
-	border: 1px solid #1a4e1a63;
+	border: 1px solid ${(props) => (props && props.darkMode ? RED : '#1a4e1a63')};
 	cursor: pointer;
+`
+
+export const DarkModeToggle = styled.img`
+	position: fixed;
+	top: 20px;
+	right: 20px;
 `
