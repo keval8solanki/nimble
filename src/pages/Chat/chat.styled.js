@@ -55,7 +55,7 @@ export const MessageBubble = styled.p`
 export const ChatDisplayContainer = styled.div`
 	/* display: flex;
 	flex-direction: column; */
-	min-height: ${window?.innerHeight - 63}px;
+	
 `
 
 export const InputContainter = styled.div`

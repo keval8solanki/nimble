@@ -11,7 +11,6 @@ import {
 	LeaveButton,
 	ChatContainer,
 	TitleContainer,
-	ChatDisplayContainer,
 } from './chat.styled'
 
 import DarkIcon from '../../assets/icons/dark.svg'
@@ -105,31 +104,29 @@ export default function ChatPage({ match }) {
 				</div>
 			</TitleContainer>
 
-			<ChatDisplayContainer>
-				<MessageBubble
-					onlineStatus={onlineStatus}
-					darkMode={darkMode}
-					ref={messageRef}>
-					Your partner's message will appear here!
-				</MessageBubble>
+			<MessageBubble
+				onlineStatus={onlineStatus}
+				darkMode={darkMode}
+				ref={messageRef}>
+				Your partner's message will appear here!
+			</MessageBubble>
 
-				<InputContainter darkMode={darkMode}>
-					<textarea
-						rows='3'
-						ref={textareaRef}
-						onChange={(e) => emit(e.target.value)}
-						placeholder='Type your message here...'></textarea>
+			<InputContainter darkMode={darkMode}>
+				<textarea
+					rows='3'
+					ref={textareaRef}
+					onChange={(e) => emit(e.target.value)}
+					placeholder='Type your message here...'></textarea>
 
-					<button
-						onClick={() => {
-							textareaRef.current.value = ''
-							textareaRef.current.focus()
-							emit('')
-						}}>
-						Clear
-					</button>
-				</InputContainter>
-			</ChatDisplayContainer>
+				<button
+					onClick={() => {
+						textareaRef.current.value = ''
+						textareaRef.current.focus()
+						emit('')
+					}}>
+					Clear
+				</button>
+			</InputContainter>
 
 			{isLeft && <Redirect to='/' />}
 		</ChatContainer>
