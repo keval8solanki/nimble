@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Redirect } from 'react-router'
 import {
 	Container,
@@ -36,6 +36,8 @@ export default function HomePage() {
 
 	const [darkMode, setDarkMode] = useDarkMode()
 
+	const inputRef = useRef(null)
+
 	return (
 		<Container>
 			<DarkModeToggle
@@ -53,12 +55,14 @@ export default function HomePage() {
 						if (roomname) {
 							setNewRoom(true)
 						}
+						inputRef.current.blur()
 					}}>
 					<EnterRoomInput
 						autoFocus
 						required
 						darkMode={darkMode}
 						value={roomname}
+						ref={inputRef}
 						onChange={(e) => {
 							const val = e.target.value.toLowerCase().split(' ').join('-')
 							setRoomname(val)

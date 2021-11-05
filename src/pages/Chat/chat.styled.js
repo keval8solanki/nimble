@@ -10,7 +10,7 @@ export const TitleContainer = styled.div`
 	top: 0;
 	z-index: 10;
 	background-color: ${(props) =>
-		props && props.darkMode ? '#1a1a1a' : 'white'};
+		props && props.darkMode ? '#2a2a2a' : 'white'};
 	padding: 10px 20px;
 `
 
@@ -22,7 +22,10 @@ export const MessageBubble = styled.p`
 	margin: 0 auto;
 	color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 
-	font-size: 1.2em;
+	/* font-size: 1.2em; */
+
+	font-weight: bold;
+
 	margin: 20px 20px 0 20px;
 
 	text-align: left;
@@ -60,7 +63,7 @@ export const InputContainter = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	padding: 20px;
-	background: ${(props) => (props && props.darkMode ? '#1a1a1a' : 'white')};
+	background: ${(props) => (props && props.darkMode ? '#2a2a2a' : 'white')};
 
 	/* position: fixed;
 	bottom: 0; */
@@ -81,7 +84,9 @@ export const InputContainter = styled.div`
 		color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
 
 		flex: 1;
-		font-size: 1.3em;
+		/* font-size: 1.3em; */
+		font-weight: bold;
+		line-height: 1.4em;
 		&:focus {
 			outline: ${CHARCOAL};
 			border: 1px solid ${RED};

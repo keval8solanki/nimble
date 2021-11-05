@@ -14,6 +14,7 @@ code {
 }
 
 .dark-mode {
-	background-color: #1a1a1a;
+	/* background-color: #1a1a1a; */
+	background-color: #2a2a2a;
 	color: #fff;
 }
