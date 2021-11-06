@@ -15,6 +15,11 @@ import {
 
 import DarkIcon from '../../assets/icons/dark.svg'
 import LightIcon from '../../assets/icons/light.svg'
+import ClearAudio from '../../assets/sound/clear.mp3'
+import ClickAudio from '../../assets/sound/click.wav'
+
+const clearPress = new Audio(ClearAudio)
+const clickAudio = new Audio(ClickAudio)
 
 export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
@@ -66,6 +71,14 @@ export default function ChatPage({ match }) {
 	})
 
 	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
+		clickAudio.currentTime = 0
+		clickAudio.play()
+		const isCleared = data?.data === ''
+		if (isCleared) {
+			clearPress.currentTime = 0
+			clearPress.play()
+		}
+
 		if (messageRef.current) {
 			messageRef.current.innerText = data?.data
 		}
@@ -114,6 +127,7 @@ export default function ChatPage({ match }) {
 			<InputContainter darkMode={darkMode}>
 				<textarea
 					rows='3'
+					autoFocus
 					ref={textareaRef}
 					onChange={(e) => emit(e.target.value)}
 					placeholder='Type your message here...'></textarea>
