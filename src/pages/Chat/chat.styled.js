@@ -55,7 +55,6 @@ export const MessageBubble = styled.p`
 export const ChatDisplayContainer = styled.div`
 	/* display: flex;
 	flex-direction: column; */
-	
 `
 
 export const InputContainter = styled.div`
@@ -117,3 +116,5 @@ export const ChatContainer = styled.div`
 	background: transparent;
 	/* padding: 20px; */
 `
+
+export const Icon = styled.img``
