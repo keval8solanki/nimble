@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
-import { useDarkMode, useLocalStorage } from 'use-hooks'
+import { useDarkMode } from 'use-hooks'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { GREEN, RED } from '../../styles/colors'
@@ -16,10 +16,10 @@ import {
 import DarkIcon from '../../assets/icons/dark.svg'
 import LightIcon from '../../assets/icons/light.svg'
 
-import SoundOnWhite from '../../assets/icons/volume_up_white.svg'
-import SoundOnBlack from '../../assets/icons/volume_up_black.svg'
-import SoundOffWhite from '../../assets/icons/volume_off_white.svg'
-import SoundOffBlack from '../../assets/icons/volume_off_black.svg'
+// import SoundOnWhite from '../../assets/icons/volume_up_white.svg'
+// import SoundOnBlack from '../../assets/icons/volume_up_black.svg'
+// import SoundOffWhite from '../../assets/icons/volume_off_white.svg'
+// import SoundOffBlack from '../../assets/icons/volume_off_black.svg'
 
 import ClearAudio from '../../assets/sound/clear.mp3'
 import ClickAudio from '../../assets/sound/click.wav'
@@ -31,37 +31,7 @@ export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
 
 	const [darkMode, setDarkMode] = useDarkMode()
-	const [sound, setSound] = useLocalStorage('sound', true)
-
-	console.log(sound)
-
-	const Sound = ({ sound = true }) => {
-		let _sound = sound
-
-		const setSound = (sound) => (_sound = sound)
-		const playKeySound = () => {
-			if (_sound) {
-				clickAudio.currentTime = 0
-				clickAudio.play()
-			}
-		}
-
-		const playClearSound = () => {
-			if (_sound) {
-				clearPress.currentTime = 0
-				clearPress.play()
-			}
-		}
-
-		return {
-			setSound,
-			playKeySound,
-			playClearSound,
-		}
-	}
-
-	const audio = Sound({ sound })
-	audio.setSound(sound)
+	// const [sound, setSound] = useLocalStorage('sound', true)
 
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
