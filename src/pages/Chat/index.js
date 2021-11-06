@@ -33,6 +33,36 @@ export default function ChatPage({ match }) {
 	const [darkMode, setDarkMode] = useDarkMode()
 	const [sound, setSound] = useLocalStorage('sound', true)
 
+	console.log(sound)
+
+	const Sound = ({ sound = true }) => {
+		let _sound = sound
+
+		const setSound = (sound) => (_sound = sound)
+		const playKeySound = () => {
+			if (_sound) {
+				clickAudio.currentTime = 0
+				clickAudio.play()
+			}
+		}
+
+		const playClearSound = () => {
+			if (_sound) {
+				clearPress.currentTime = 0
+				clearPress.play()
+			}
+		}
+
+		return {
+			setSound,
+			playKeySound,
+			playClearSound,
+		}
+	}
+
+	const audio = Sound({ sound })
+	audio.setSound(sound)
+
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
 	const messageRef = useRef()
@@ -78,18 +108,14 @@ export default function ChatPage({ match }) {
 	})
 
 	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
-		if (sound) {
-			clickAudio.currentTime = 0
-			clickAudio.play()
-		}
+		clickAudio.currentTime = 0
+		clickAudio.play()
 		navigator.vibrate(50)
 
 		const isCleared = data?.data === ''
 		if (isCleared) {
-			if (sound) {
-				clearPress.currentTime = 0
-				clearPress.play()
-			}
+			clearPress.currentTime = 0
+			clearPress.play()
 			navigator.vibrate(500)
 		}
 
@@ -116,21 +142,21 @@ export default function ChatPage({ match }) {
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'space-between',
-						width: '150px',
+						width: '110px',
 					}}>
-					<img
+					{/* <img
 						src={
 							darkMode
 								? sound
-									? SoundOffWhite
-									: SoundOnWhite
+									? SoundOnWhite
+									: SoundOffWhite
 								: sound
-								? SoundOffBlack
-								: SoundOnBlack
+								? SoundOnBlack
+								: SoundOffBlack
 						}
 						onClick={() => setSound(!sound)}
 						alt='sound-icon'
-					/>
+					/> */}
 					<DarkModeToggle
 						style={{ position: 'static' }}
 						src={darkMode ? LightIcon : DarkIcon}
