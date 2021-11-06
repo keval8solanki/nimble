@@ -73,10 +73,13 @@ export default function ChatPage({ match }) {
 	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
 		clickAudio.currentTime = 0
 		clickAudio.play()
+		navigator.vibrate(50)
+
 		const isCleared = data?.data === ''
 		if (isCleared) {
 			clearPress.currentTime = 0
 			clearPress.play()
+			navigator.vibrate(500)
 		}
 
 		if (messageRef.current) {
