@@ -18,4 +18,5 @@ export default App
 
 const Container = styled.div`
 	text-align: center;
+	height: 100%;
 `
