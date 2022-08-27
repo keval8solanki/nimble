@@ -16,7 +16,7 @@ export const TitleContainer = styled.div`
 
 export const MessageBubble = styled.p`
 	padding: 20px;
-	flex: 2;
+	flex: 1;
 	background: ${(props) => (props && props.darkMode ? '#c8d5db24' : '#c8d5db')};
 	border-radius: 8px;
 	margin: 0 auto;
@@ -53,25 +53,33 @@ export const MessageBubble = styled.p`
 `
 
 export const ChatDisplayContainer = styled.div`
-	/* display: flex;
-	flex-direction: column; */
+	display: flex;
+	flex-direction: column;
+	height: 80vh;
 `
 
 export const InputContainter = styled.div`
 	display: flex;
-	align-items: flex-start;
+	flex: 1;
+
+	position: fixed;
+	bottom: 20px;
+	/* right: 20px; */
+	display: flex;
+
+	align-items: flex-end;
 	justify-content: center;
 	padding: 20px;
 	background: ${(props) => (props && props.darkMode ? '#2a2a2a' : 'white')};
 
-	position: sticky;
-	bottom: 0;
+	/* position: sticky; */
+	/* bottom: 0; */
 	width: calc(100% - 40px);
-	flex: 1;
+
 	flex-direction: column;
 
 	textarea {
-		width: calc(100% - 43px);
+		width: calc(100% - 40px);
 		margin: 0;
 		padding: 20px;
 		border-radius: 8px;
@@ -81,9 +89,16 @@ export const InputContainter = styled.div`
 
 		margin-bottom: 10px;
 		color: ${(props) => (props && props.darkMode ? 'white' : CHARCOAL)};
+		resize: none;
+
+		&::placeholder {
+			font-family: 'Nunito', sans-serif;
+			font-weight: bold;
+			/* font-size: 1.3em; */
+		}
 
 		flex: 1;
-		/* font-size: 1.3em; */
+		font-size: 1.3em;
 		font-weight: bold;
 		line-height: 1.4em;
 		&:focus {
@@ -92,8 +107,7 @@ export const InputContainter = styled.div`
 		}
 	}
 	button {
-		width: 100%;
-		padding: 5px;
+		padding: 5px 10px;
 
 		background: ${(props) => (props && props.darkMode ? 'transparent' : RED)};
 		color: ${(props) => (props && props.darkMode ? RED : 'white')};

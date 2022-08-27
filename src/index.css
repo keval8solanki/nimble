@@ -3,6 +3,9 @@
 * {
 	transition: all 0.8s;
 }
+html,body,#root{
+	height: 100%;
+}
 
 body {
 	margin: 0;

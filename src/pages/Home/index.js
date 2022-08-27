@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Redirect } from 'react-router'
 import {
 	Container,
@@ -11,7 +11,7 @@ import {
 	Title,
 } from './homepage.styled'
 
-import { useDarkMode } from 'use-hooks'
+import { useDarkMode, useLocalStorage } from 'use-hooks'
 import DarkIcon from '../../assets/icons/dark.svg'
 import LightIcon from '../../assets/icons/light.svg'
 
@@ -21,6 +21,7 @@ import {
 	colors,
 	animals,
 } from 'unique-names-generator'
+import { useBG } from '../../hooks'
 
 const customConfig = {
 	dictionaries: [colors, adjectives, animals],
@@ -33,6 +34,17 @@ export default function HomePage() {
 	const [roomname, setRoomname] = useState(() =>
 		uniqueNamesGenerator(customConfig)
 	)
+	const [bg, setBG] = useBG()
+
+	const bgChangeHandler = (e) => {
+		const file = e.target.files[0]
+		const reader = new FileReader()
+
+		reader.onload = function () {
+			setBG(reader.result)
+		}
+		reader.readAsDataURL(file)
+	}
 
 	const [darkMode, setDarkMode] = useDarkMode()
 
@@ -40,6 +52,8 @@ export default function HomePage() {
 
 	return (
 		<Container>
+			<button onClick={() => setBG('')}>Clear BG</button>
+			<input type='file' accept='image/*' onChange={bgChangeHandler} />
 			<DarkModeToggle
 				src={darkMode ? LightIcon : DarkIcon}
 				onClick={() => setDarkMode(!darkMode)}
