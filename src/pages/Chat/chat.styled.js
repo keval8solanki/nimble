@@ -26,11 +26,12 @@ export const MessageBubble = styled.p`
 
 	font-weight: bold;
 
-	margin: 20px 20px 0 20px;
+	margin: 0px 20px 0 20px;
 
 	text-align: left;
 	overflow-wrap: break-word;
-	min-height: 54px;
+	height: calc(100% - 288px);
+	overflow: scroll;
 	outline: none;
 	border: ${(props) =>
 		props && props.onlineStatus ? '1px solid #2a9d8f' : 'none'};
@@ -62,9 +63,10 @@ export const InputContainter = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	padding: 20px;
+	padding-top: 0px;
 	background: ${(props) => (props && props.darkMode ? '#2a2a2a' : 'white')};
 
-	position: sticky;
+	position: fixed;
 	bottom: 0;
 	width: calc(100% - 40px);
 	flex: 1;
@@ -72,6 +74,7 @@ export const InputContainter = styled.div`
 
 	textarea {
 		width: calc(100% - 43px);
+		resize: none;
 		margin: 0;
 		padding: 20px;
 		border-radius: 8px;
@@ -108,12 +111,14 @@ export const LeaveButton = styled(Button)`
 	background: ${(props) => (props && props.darkMode ? 'transparent' : RED)};
 	color: ${(props) => (props && props.darkMode ? RED : 'white')};
 	border-radius: 8px;
-	border: 1px solid ${(props) => (props && props.darkMode ? RED : '#1a4e1a63')};
+	/* border: 1px solid ${(props) =>
+		props && props.darkMode ? RED : '#1a4e1a63'}; */
 	cursor: pointer;
 `
 
 export const ChatContainer = styled.div`
 	background: transparent;
+	height: 100%;
 	/* padding: 20px; */
 `
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Redirect } from 'react-router'
-import { useDarkMode } from 'use-hooks'
+import { useDarkMode, useLocalStorage } from 'use-hooks'
 
 import { socket, SOCKET_EVENTS } from '../../socket'
 import { GREEN, RED } from '../../styles/colors'
@@ -31,7 +31,8 @@ export default function ChatPage({ match }) {
 	const { id } = match?.params || {}
 
 	const [darkMode, setDarkMode] = useDarkMode()
-	// const [sound, setSound] = useLocalStorage('sound', true)
+	const [sound, setSound] = useLocalStorage('sound', true)
+	const [vibration, setVibration] = useLocalStorage('vibration', true)
 
 	const [onlineStatus, setOnlineStatus] = useState(false)
 
@@ -79,14 +80,13 @@ export default function ChatPage({ match }) {
 
 	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
 		clickAudio.currentTime = 0
-		clickAudio.play()
-		navigator.vibrate(50)
+		if (sound) clickAudio.play()
 
 		const isCleared = data?.data === ''
 		if (isCleared) {
 			clearPress.currentTime = 0
-			clearPress.play()
-			navigator.vibrate(500)
+			if (sound) clearPress.play()
+			if (vibration) navigator.vibrate(50)
 		}
 
 		if (messageRef.current) {
@@ -149,16 +149,19 @@ export default function ChatPage({ match }) {
 
 			<InputContainter darkMode={darkMode}>
 				<textarea
-					rows='3'
+					rows='4'
 					autoFocus
 					ref={textareaRef}
 					onChange={(e) => emit(e.target.value)}
-					placeholder='Type your message here...'></textarea>
+					placeholder='Type here...'></textarea>
 
 				<button
 					onClick={() => {
 						textareaRef.current.value = ''
 						textareaRef.current.focus()
+						clearPress.currentTime = 0
+						if (sound) clearPress.play()
+						if (vibration) navigator.vibrate(50)
 						emit('')
 					}}>
 					Clear
