@@ -16,6 +16,8 @@ export const TitleContainer = styled.div`
 
 export const MessageBubble = styled.p`
 	padding: 20px;
+	/* transform: translateY(-100vh); */
+	/* opacity: 0; */
 	flex: 2;
 	background: ${(props) => (props && props.darkMode ? '#c8d5db24' : '#c8d5db')};
 	border-radius: 8px;
@@ -41,6 +43,41 @@ export const MessageBubble = styled.p`
 			opacity: 0;
 		}
 	}
+
+	@keyframes come {
+		0% {
+			opacity: 1;
+			transform: scale(0.2) translateY(-200vh);
+			border-radius: 100px;
+			padding: 0;
+			margin: 0;
+			font-size: 0;
+		}
+
+		25% {
+			transform: scale(0.2);
+			border-radius: 100px;
+			padding: 0;
+			margin: 0;
+			font-size: 0;
+		}
+		50% {
+			padding: 0;
+			margin: 0;
+			font-size: 0;
+		}
+
+		85% {
+			font-size: 0;
+		}
+
+		100% {
+		}
+	}
+	/* animation-fill-mode: both; */
+	/* animation: come 1.5s forwards; */
+
+	animation: come 1s ease-in-out 1s 1 normal both;
 
 	&::after {
 		content: '';
@@ -73,6 +110,34 @@ export const InputContainter = styled.div`
 	flex-direction: column;
 
 	textarea {
+		@keyframes come2 {
+			0% {
+				transform: scale(0.2) translateY(100vh);
+				border-radius: 1000px;
+				width: 0px;
+				padding: 0;
+				margin: 0;
+				font-size: 0;
+			}
+
+			25% {
+				transform: scale(0.2);
+				border-radius: 100px;
+				padding: 0;
+				width: 0px;
+				margin: 0;
+				font-size: 0;
+			}
+			50% {
+				width: 50%;
+			}
+
+			100% {
+			}
+		}
+
+		animation: come2 1.5s ease-in-out 0s 1 normal both;
+
 		width: calc(100% - 43px);
 		resize: none;
 		margin: 0;
@@ -95,6 +160,14 @@ export const InputContainter = styled.div`
 		}
 	}
 	button {
+		@keyframes come3 {
+			0% {
+				transform: translateY(100vh);
+			}
+			100% {
+			}
+		}
+		animation: come3 2s ease-in-out 0.5s 1 normal both;
 		width: 100%;
 		padding: 5px;
 
