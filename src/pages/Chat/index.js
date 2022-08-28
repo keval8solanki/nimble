@@ -80,7 +80,7 @@ export default function ChatPage({ match }) {
 
 	socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data) => {
 		clickAudio.currentTime = 0
-		if (sound) clickAudio.play()
+		clickAudio.play()
 
 		const isCleared = data?.data === ''
 		if (isCleared) {
