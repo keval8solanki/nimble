@@ -10,7 +10,7 @@ const BASE_URLS = {
 		socketBaseUrl: 'http://localhost:8000',
 	},
 	production: {
-		socketBaseUrl: 'https://infini8.herokuapp.com',
+		socketBaseUrl: 'https://infini8.onrender.com',
 	},
 }
 
